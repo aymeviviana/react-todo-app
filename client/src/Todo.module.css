@@ -1,0 +1,82 @@
+.todo_item {
+  position: relative;
+}
+
+td{
+  width: 100%;
+  padding-left: 15px;
+}
+
+td input[type="checkbox"]{
+  display: none;
+}
+
+td {
+  border-top: 1px solid #e7e7e7;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+td{
+  color: #060606;
+}
+
+td input[type="checkbox"]:hover{
+  cursor: normal;
+}
+
+.done ~ label {
+  color: #b3b3b3;
+  text-decoration: line-through;
+}
+
+label {
+  cursor: pointer;
+  padding-left: 30px;
+}
+
+.done + .check {
+  background-image: url("images/checked.png");
+}
+
+td label:hover{
+  color: #148fd5;
+}
+
+tr{
+  width: 100%;
+  border-top: 3px solid black;
+  padding: 15px 0;
+}
+
+tr td.delete{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+td.delete:hover{
+  background-color: rgba(255, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+tr td.delete img{
+  margin-left: 0;
+  text-align: center;
+}
+
+tr td:last-of-type{
+  text-align: right;
+}
+
+td:hover{
+  background-color: rgba(0,100,205, 0.2);
+}
+
+.check {
+  background: transparent url("images/checkbox.png") no-repeat;
+  position: absolute;
+  top: 18px;
+  left: 15px;
+  height: 15px;
+  width: 15px;
+}

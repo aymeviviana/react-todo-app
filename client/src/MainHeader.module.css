@@ -1,0 +1,18 @@
+header dl {
+  margin: 30px 0 0 15px;
+  padding: 0 0 40px 0;
+}
+header dl dt{
+  font-size: 21px;
+  color: #050505;
+  display: inline-block;
+}
+header dl dd{
+  display: inline-block;
+  background-color: #148fd5;
+  color: #ffffff;
+  font-size: 14px;
+  border-radius: 100%;
+  padding: 0 3px 0 4px;
+  margin-left: 20px;
+}

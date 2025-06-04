@@ -1,0 +1,96 @@
+#sidebar {
+  width: 335px;
+  background: #464f77;
+  float:left;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 70px 0 100% 0;
+  margin-bottom: -100%;
+  box-sizing: border-box;
+}
+
+#sidebar header{
+  background: transparent url('/src/images/label.png') 0 7px no-repeat;
+  margin-left: 100px;
+  box-sizing: border-box;
+  padding-bottom: 10px;
+}
+
+#completed_todos header {
+  margin-left: 0;
+  padding-left: 100px
+}
+
+#sidebar header dl{
+  padding: 10px 0 5px 35px;
+}
+header dt, header dd{
+  display: inline-block;
+}
+#sidebar header dt{
+  font-size: 18px;
+  color: #ffffff;
+  margin-right: 60px;
+}
+
+#sidebar #completed_todos header dt {
+  font-size: 18px;
+  color: #ffffff;
+  margin-right: 48px;
+}
+
+#sidebar header dd{
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  width: 25px;
+  background-color: #6b7292;
+  border-radius: 35%;
+  padding: 0;
+  margin:0;
+  text-align: center;
+}
+#sidebar section{
+  padding-bottom: 40px;
+}
+
+#sidebar article dl {
+  padding-left: 135px;
+  cursor: pointer;
+}
+#sidebar article dt, article dd {
+  display: inline-block;
+  vertical-align: middle
+}
+#sidebar header.active{
+  background-color: #383f5f;
+  margin-left: 0px;
+  background-position: 100px center;
+}
+
+#sidebar header.active dl{
+  margin-left: 100px;
+}
+
+#sidebar #completed_todos header.active dl {
+  margin-left: 0px;
+}
+#sidebar header.active dd{
+  background-color: #148fd5;
+  color: #ffffff;
+}
+
+#sidebar article dd {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  background-color: #6b7292;
+  border-radius: 100%;
+  padding: 0 3.5px;
+}
+#sidebar article dt {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  margin-right: 32px;
+  width: 110px;
+}
+#sidebar section.completed article dt{
+  text-decoration: line-through;
+}
