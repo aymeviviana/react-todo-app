@@ -1,12 +1,36 @@
-dl.active {
+.groupWrapper {
+  padding-left: 135px;
+  cursor: pointer;
+}
+
+.groupName, .groupTotal {
+  display: inline-block;
+  vertical-align: middle
+}
+
+.groupTotal {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  background-color: #6b7292;
+  border-radius: 100%;
+  padding: 0 3.5px;
+}
+
+.groupName {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  margin-right: 32px;
+  width: 110px;
+}
+
+.groupWrapper.active {
   background-color: #383f5f;
   color: #ffffff;
   margin-left: 0px;
   padding-left: 135px;
 }
 
-dl.active dd {
+.groupWrapper.active .groupTotal {
   background-color: #148fd5;
   color: #ffffff;
 }
-

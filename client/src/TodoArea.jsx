@@ -7,7 +7,7 @@ import TodoList from './TodoList';
 function TodoArea({ activeGroup, allTodos, displayAddTodoModal, deleteTodo, updateTodo }) { 
 
   return (
-    <div id={styles.todos_area}>
+    <div className={styles.todosArea}>
       <MainHeader
         groupName={activeGroup.name}
         total={activeGroup.total}

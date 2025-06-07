@@ -1,3 +1,69 @@
+.sectionWrapper{
+  padding-bottom: 40px;
+}
+
+.sectionHeader {
+  background: transparent url('/src/images/label.png') 0 7px no-repeat;
+  margin-left: 100px;
+  box-sizing: border-box;
+  padding-bottom: 10px;
+}
+
+.completedTodos .sectionHeader {
+  background: transparent url('/src/images/completed.png') 0 7px no-repeat;
+  margin-left: 100px;
+  box-sizing: border-box;
+  padding-bottom: 10px;
+}
+
+.sectionHeaderWrapper{
+  padding: 10px 0 5px 35px;
+}
+
+.sectionName {
+  font-size: 18px;
+  color: #ffffff;
+  margin-right: 60px;
+  display: inline-block;
+}
+
+.sectionTotal {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  width: 25px;
+  background-color: #6b7292;
+  border-radius: 35%;
+  padding: 0;
+  margin:0;
+  text-align: center;
+  display: inline-block;
+}
+
+.sectionHeader.active{
+  background-color: #383f5f;
+  margin-left: 0px;
+  background-position: 100px center;
+}
+
+.sectionHeader.active dl{
+  margin-left: 100px;
+}
+
+.sectionHeader.active dd{
+  background-color: #148fd5;
+  color: #ffffff;
+}
+
 .cursor {
   cursor: pointer;
+}
+
+.completedTodos header dt {
+  font-size: 18px;
+  color: #ffffff;
+  margin-right: 48px;
+}
+
+.completedTodos article dt{
+  text-decoration: line-through;
 }

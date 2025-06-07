@@ -52,29 +52,46 @@ function UpdateTodoForm({ formValues, updateTodo, removeModal }) {
 
 
   return (
-    <div id={styles.form_modal}>
+    <div className={styles.formModal}>
       <form
+        className={styles.form}
         onSubmit={(event) => handleUpdateTodo(event)}
       >
         <fieldset>
           <ul>
-            <li>
-              <label htmlFor="title">Title</label>
+            <li
+              className={styles.listItem}
+            >
+              <label
+                htmlFor="title"
+                className={styles.formLabel}
+              >
+                Title
+              </label>
               <input
                 type="text"
                 name="title"
                 id="title"
+                className={styles.textInput}
                 placeholder="Item 1"
                 value={formData.title}
                 onChange={handleChange}
               />
             </li>
-            <li>
-              <label htmlFor="due">Due Date</label>
+            <li
+              className={styles.listItem}
+            >
+              <label
+                htmlFor="due"
+                className={styles.formLabel}
+              >
+                Due Date
+              </label>
               <div className={ styles.date }>
                 <select
                   id="due"
                   name="day"
+                  className={styles.selectDate}
                   value={formData.day}
                   onChange={handleChange}
                 >
@@ -114,6 +131,7 @@ function UpdateTodoForm({ formValues, updateTodo, removeModal }) {
                 <select
                   id="due_month"
                   name="month"
+                  className={styles.selectDate}
                   value={formData.month}
                   onChange={handleChange}
                 >
@@ -134,6 +152,7 @@ function UpdateTodoForm({ formValues, updateTodo, removeModal }) {
                 <select
                   id="due_year"
                   name="year"
+                  className={styles.selectDate}
                   placeholder="year"
                   value={formData.year}
                   onChange={handleChange}
@@ -154,12 +173,20 @@ function UpdateTodoForm({ formValues, updateTodo, removeModal }) {
                 </select>
               </div>
             </li>
-            <li>
-              <label htmlFor="description">Description</label>
+            <li
+              className={styles.listItem}
+            >
+              <label
+                htmlFor="description"
+                className={styles.formLabel}
+              >
+                Description
+              </label>
               <textarea
                 id="description"
                 cols="50"
                 name="description"
+                className={styles.textArea}
                 rows="7"
                 placeholder="Description"
                 value={formData.description}
@@ -167,11 +194,18 @@ function UpdateTodoForm({ formValues, updateTodo, removeModal }) {
               >
               </textarea>
             </li>
-            <li>
-              <input type="submit" value="Save" />
+            <li
+              className={styles.listItem}
+            >
+              <input
+                type="submit"
+                value="Save"
+                className={styles.submitInput}
+              />
               <button
                 type="button"
                 name="complete"
+                className={styles.button}
                 onClick={markTodoAsComplete}
               >
                 Mark As Complete

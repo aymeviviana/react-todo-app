@@ -55,13 +55,16 @@ function Todo({ todo, deleteTodo, updateTodo, displayUpdateTodoModal }) {
 
   return (
     <>
-      <tr data-id={todo.id}>
+      <tr
+        data-id={todo.id}
+        className={styles.todoItemWrapper}
+      >
         <td
-          className={styles.todo_item}
+          className={`${styles.todoItem} ${styles.todoMainArea}`}
           onClick={(event) => updateCompletedStatus(event, todo.id)}
         >
           <input
-            className={ todo.completed ? styles.done : undefined}
+            className={`${styles.checkboxInput} ${todo.completed ? styles.done : undefined}`}
             ref={inputRef}
             type="checkbox"
             name={todo.id}
@@ -70,7 +73,7 @@ function Todo({ todo, deleteTodo, updateTodo, displayUpdateTodoModal }) {
           <span className={styles.check}></span>
           <label
             htmlFor={todo.id}
-            className="title"
+            className={styles.labelWrapper}
             onClick={() => displayUpdateTodoModal(todo)}
           >
             {`${todo.title} - ${getDueDate(todo.month, todo.year)}`}

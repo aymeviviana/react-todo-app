@@ -2,33 +2,34 @@ import React from 'react';
 import styles from './TodoGroupsSection.module.css';
 import Group from './Group';
 
-function TodoGroupsSection({ sectionName, activeGroup, todoGroups, todoGroupsTotal, handleGroupClick }) { 
-  
-return (
-    <section>
+function TodoGroupsSection({ sectionName, sectionClass, activeGroup, todoGroups, todoGroupsTotal, handleGroupClick }) { 
+  const isHeaderGroupActive = activeGroup.section === sectionName && activeGroup.name === sectionName;
+  return (
+    <section className={`${styles.sectionWrapper} ${styles[sectionClass]}`}>
       <div className={styles.cursor}>
         <header
-          className={activeGroup.section === sectionName && activeGroup.name === sectionName ? styles.active : ""}
+          className={`${styles.sectionHeader} ${isHeaderGroupActive ? styles.active : ""}`}
         >
           <dl
             data-section={sectionName}
             data-group={sectionName}
             data-total={todoGroupsTotal}
+            className={styles.sectionHeaderWrapper}
             onClick={handleGroupClick}
           >
-            <dt>{sectionName}</dt>
-            <dd>{todoGroupsTotal}</dd>
+          <dt className={styles.sectionName}>{sectionName}</dt>
+          <dd className={styles.sectionTotal}>{todoGroupsTotal}</dd>
           </dl>
         </header>
       </div>
       <article>
-        {todoGroups.map(([ groupName, groupCount ]) => (
+        {todoGroups.map(([ groupName, groupTotal ]) => (
           <Group
             key={groupName}
             activeGroup={activeGroup}
             groupSection={sectionName}
             groupName={groupName}
-            groupCount={groupCount}
+            groupTotal={groupTotal}
             handleGroupClick={handleGroupClick}
           >
           </Group>

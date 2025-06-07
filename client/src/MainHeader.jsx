@@ -4,9 +4,9 @@ import styles from './MainHeader.module.css';
 function MainHeader({ groupName, total }) { 
   return (
     <header>
-      <dl>
-        <dt>{ groupName }</dt>
-        <dd>{ total }</dd>
+      <dl className={styles.groupWrapper}>
+        <dt className={styles.groupNameWrapper}>{groupName}</dt>
+        <dd className={styles.groupCountWrapper}>{total}</dd>
       </dl>
     </header>
   );

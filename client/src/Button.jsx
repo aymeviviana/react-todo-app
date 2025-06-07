@@ -4,7 +4,10 @@ import styles from './Button.module.css';
 function Button({ displayAddTodoModal }) { 
 
   return (
-    <button onClick={displayAddTodoModal}>
+    <button
+      className={styles.button}
+      onClick={displayAddTodoModal}
+    >
       Add Todo
     </button>
   );

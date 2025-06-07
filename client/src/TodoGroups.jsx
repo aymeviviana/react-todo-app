@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './TodoGroups.module.css';
 import TodoGroupsSection from './TodoGroupsSection';
-import { ALL_TODOS_SECTION } from './constants';
-import { COMPLETED_TODOS_SECTION } from './constants';
+import { ALL_TODOS_SECTION, COMPLETED_TODOS_SECTION } from './constants';
+import { ALL_TODOS_CLASS, COMPLETED_TODOS_CLASS } from './constants';
 
 function TodoGroups({ allTodos, activeGroup, setActiveGroup }) { 
   
@@ -75,9 +75,10 @@ function TodoGroups({ allTodos, activeGroup, setActiveGroup }) {
   }
 
   return (
-    <div id={styles.sidebar}>
+    <div className={styles.sidebar}>
       <TodoGroupsSection
         sectionName={ALL_TODOS_SECTION}
+        sectionClass={ALL_TODOS_CLASS}
         activeGroup={activeGroup}
         todoGroups={allTodoGroups}
         todoGroupsTotal={allTodoGroupsTotal}
@@ -86,6 +87,7 @@ function TodoGroups({ allTodos, activeGroup, setActiveGroup }) {
 
       <TodoGroupsSection
         sectionName={COMPLETED_TODOS_SECTION}
+        sectionClass={COMPLETED_TODOS_CLASS}
         activeGroup={activeGroup}
         todoGroups={completedTodoGroups}
         todoGroupsTotal={completedTodoGroupsTotal}

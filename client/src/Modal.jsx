@@ -5,10 +5,9 @@ function Modal({ removeModal, children }) {
   return (
     <>
       <div
-        id={styles.modal_layer}
+        className={styles.modalLayer}
         onClick={()=> removeModal()}
       >
-        
       </div>
       {children}
     </>
