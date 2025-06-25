@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './AddTodoForm.module.css';
 import { ENDPOINT } from '../../constants';
 
-function AddTodoForm({ addTodo, removeModal, resetActiveGroup }) { 
+function AddTodoForm({ onSubmit }) { 
   const [formData, setFormData] = React.useState(
     {
       title: "",
@@ -37,9 +37,7 @@ function AddTodoForm({ addTodo, removeModal, resetActiveGroup }) {
       }
 
       const todo = await response.json();
-      removeModal();
-      addTodo(todo);
-      resetActiveGroup();
+      onSubmit(todo);
     } catch (error) { 
       console.log(`Encountered an Error: ${error.message}`)
     }
