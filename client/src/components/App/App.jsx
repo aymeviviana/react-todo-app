@@ -4,6 +4,7 @@ import TodoGroups from '../TodoGroups/TodoGroups';
 import TodoArea from '../TodoArea/TodoArea';
 import Modal from '../Modal/Modal';
 import AddTodoForm from '../AddTodoForm/AddTodoForm';
+import { sortTodos } from '../../utils/todosHelpers.jsx';
 import { ALL_TODOS_SECTION } from '../../constants';
 import { ALL_TODOS_GROUP } from '../../constants';
 import { ENDPOINT } from '../../constants';
@@ -33,22 +34,6 @@ function App() {
     fetchAllTodos();
   }, []);
 
-  function sortTodos(todos) { 
-    todos.sort((todo1, todo2) => { 
-      let todo1Status = todo1.completed ? 1 : -1;
-      let todo2Status = todo2.completed ? 1 : -1;
-
-      let todo1Id = parseInt(todo1.id);
-      let todo2Id = parseInt(todo2.id);
-
-      if (todo1Status === todo2Status) {
-        return todo1Id - todo2Id;
-      } else { 
-        return todo1Status - todo2Status;
-      }
-    });
-  }
-
   const displayAddTodoModal = () => setIsAddTodoModalActive(true);
   const removeAddTodoModal = () => setIsAddTodoModalActive(false);
 
@@ -75,6 +60,12 @@ function App() {
     setActiveGroup({section: ALL_TODOS_SECTION, name: ALL_TODOS_GROUP, total: allTodos.length + 1})
   }
 
+  function handleAddTodoFormSubmit(todo) { 
+    removeAddTodoModal();
+    addTodo(todo);
+    resetActiveGroup();
+  }
+
   return (
     <>
       <TodoGroups
@@ -94,9 +85,7 @@ function App() {
           removeModal={removeAddTodoModal}
         >
           <AddTodoForm
-            addTodo={addTodo}
-            removeModal={removeAddTodoModal}
-            resetActiveGroup={resetActiveGroup}
+            onSubmit={handleAddTodoFormSubmit}
           />
         </Modal>}
     </>

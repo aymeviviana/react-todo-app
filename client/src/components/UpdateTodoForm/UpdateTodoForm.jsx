@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './UpdateTodoForm.module.css';
+import { formatDateValues } from '../../utils/updateTodoFormHelpers';
 import { ENDPOINT } from '../../constants';
 
 
@@ -16,28 +17,23 @@ function UpdateTodoForm({ todo, onSubmit }) {
   }
 
   function markTodoAsComplete(event) { 
-    handleSubmit(event, true);
+    const nextFormData = {
+      ...formData,
+      completed: true,
+    };
+    setFormData(nextFormData);
+    handleSubmit(event, nextFormData);
   }
 
-  function formatDateValues({ day, month, year }) {
-    if (day === "Day") formData.day = "";
-    if (month === "Month") formData.month = "";
-    if (year === "Year") formData.year = "";
-  }
-
-  async function handleSubmit(event, todoCompleted = undefined) {
+  async function handleSubmit(event, formData) {
     event.preventDefault();
-
-    if (todoCompleted) { 
-      formData.completed = true;
-    }
-
-    formatDateValues(formData);
+    
+    const todoData = formatDateValues(formData);
 
     try {
-      const response = await fetch(`${ENDPOINT}/${formData.id}`, {
+      const response = await fetch(`${ENDPOINT}/${todoData.id}`, {
         method: "PUT",
-        body: JSON.stringify(formData),
+        body: JSON.stringify(todoData),
         headers: {"Content-Type": "application/json; charset=UTF-8"},
       });
 
@@ -57,7 +53,7 @@ function UpdateTodoForm({ todo, onSubmit }) {
     <div className={styles.formModal}>
       <form
         className={styles.form}
-        onSubmit={(event) => handleSubmit(event)}
+        onSubmit={(event) => handleSubmit(event, formData)}
       >
         <fieldset>
           <ul>
