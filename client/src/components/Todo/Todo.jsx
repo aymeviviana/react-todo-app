@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Todo.module.css';
-import { ENDPOINT } from './constants';
+import { ENDPOINT } from '../../constants';
 
 function Todo({ todo, deleteTodo, updateTodo, displayUpdateTodoModal }) {
   const inputRef = React.useRef();

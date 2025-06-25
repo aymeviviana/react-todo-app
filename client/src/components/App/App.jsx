@@ -1,12 +1,12 @@
 import React from 'react'
 import './App.css'
-import TodoGroups from './TodoGroups';
-import TodoArea from './TodoArea';
-import Modal from './Modal';
-import AddTodoForm from './AddTodoForm';
-import { ALL_TODOS_SECTION } from './constants';
-import { ALL_TODOS_GROUP } from './constants';
-import { ENDPOINT } from './constants';
+import TodoGroups from '../TodoGroups/TodoGroups';
+import TodoArea from '../TodoArea/TodoArea';
+import Modal from '../Modal/Modal';
+import AddTodoForm from '../AddTodoForm/AddTodoForm';
+import { ALL_TODOS_SECTION } from '../../constants';
+import { ALL_TODOS_GROUP } from '../../constants';
+import { ENDPOINT } from '../../constants';
 
 function App() {
   const [isAddTodoModalActive, setIsAddTodoModalActive] = React.useState(false);

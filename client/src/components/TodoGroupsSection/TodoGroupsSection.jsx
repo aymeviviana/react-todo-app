@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './TodoGroupsSection.module.css';
-import Group from './Group';
+import Group from '../Group/Group';
 
 function TodoGroupsSection({ sectionName, sectionClass, activeGroup, todoGroups, todoGroupsTotal, handleGroupClick }) { 
   const isHeaderGroupActive = activeGroup.section === sectionName && activeGroup.name === sectionName;

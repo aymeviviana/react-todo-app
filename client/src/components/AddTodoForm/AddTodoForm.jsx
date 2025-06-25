@@ -1,61 +1,59 @@
 import React from 'react';
-import styles from './UpdateTodoForm.module.css';
-import { ENDPOINT } from './constants';
+import styles from './AddTodoForm.module.css';
+import { ENDPOINT } from '../../constants';
 
-
-function UpdateTodoForm({ formValues, updateTodo, removeModal }) { 
-  const [formData, setFormData] = React.useState(formValues);
+function AddTodoForm({ addTodo, removeModal, resetActiveGroup }) { 
+  const [formData, setFormData] = React.useState(
+    {
+      title: "",
+      day: "",
+      month: "",
+      year: "",
+      completed: false,
+      description: ""
+    });
   
   function handleChange(event) { 
     const { name, value } = event.target;
     setFormData((currentFormData) => ({...currentFormData, [name]: value}));
   }
-
-  function markTodoAsComplete(event) { 
-    handleUpdateTodo(event, true);
-  }
-
-  function formatDateValues({ day, month, year }) {
-    if (day === "Day") formData.day = "";
-    if (month === "Month") formData.month = "";
-    if (year === "Year") formData.year = "";
-  }
-
-  async function handleUpdateTodo(event, todoCompleted = undefined) {
+  
+  async function handleAddTodo(event) { 
     event.preventDefault();
 
-    if (todoCompleted) { 
-      formData.completed = true;
+    if (formData.title.length < 3) { 
+      window.alert("Please add a title that's at least 3 characters long =)");
+      return;
     }
-
-    formatDateValues(formData);
-
     try {
-      const response = await fetch(`${ENDPOINT}/${formData.id}`, {
-        method: "PUT",
+      const response = await fetch(ENDPOINT, {
+        method: "POST",
         body: JSON.stringify(formData),
-        headers: {"Content-Type": "application/json; charset=UTF-8"},
-      });
+        headers: { 'Content-Type': 'application/json; charset=UTF-8'},
+      })
 
       if (!response.ok) { 
-        throw new Error(`${response.status} ${response.textStatus}`);
+        throw new Error(`${response.status}: ${response.statusText}`)
       }
 
       const todo = await response.json();
-      updateTodo(todo, todo.id);
       removeModal();
-      
-    } catch (error) {
-      console.log(`Encountered an error: ${error.message}`);
+      addTodo(todo);
+      resetActiveGroup();
+    } catch (error) { 
+      console.log(`Encountered an Error: ${error.message}`)
     }
   }
 
+  function handleMarkAsComplete() { 
+    window.alert('Please create a new item before marking it as complete =)');
+  }
 
   return (
     <div className={styles.formModal}>
       <form
         className={styles.form}
-        onSubmit={(event) => handleUpdateTodo(event)}
+        onSubmit={handleAddTodo}
       >
         <fieldset>
           <ul>
@@ -186,8 +184,8 @@ function UpdateTodoForm({ formValues, updateTodo, removeModal }) {
                 id="description"
                 cols="50"
                 name="description"
-                className={styles.textArea}
                 rows="7"
+                className={styles.textArea}
                 placeholder="Description"
                 value={formData.description}
                 onChange={handleChange}
@@ -199,14 +197,13 @@ function UpdateTodoForm({ formValues, updateTodo, removeModal }) {
             >
               <input
                 type="submit"
-                value="Save"
                 className={styles.submitInput}
-              />
+                value="Save" />
               <button
                 type="button"
                 name="complete"
                 className={styles.button}
-                onClick={markTodoAsComplete}
+                onClick={handleMarkAsComplete}
               >
                 Mark As Complete
               </button>
@@ -218,5 +215,4 @@ function UpdateTodoForm({ formValues, updateTodo, removeModal }) {
   );
 }
 
-
-export default UpdateTodoForm;
+export default AddTodoForm;
