@@ -1,21 +1,14 @@
 import React from 'react';
 import styles from './TodoList.module.css';
-import Todo from './Todo';
-import Modal from './Modal';
-import UpdateTodoForm from './UpdateTodoForm';
-import { ALL_TODOS_SECTION, ALL_TODOS_GROUP } from './constants';
-import { COMPLETED_TODOS_SECTION, COMPLETED_TODOS_GROUP } from './constants';
+import Todo from '../Todo/Todo';
+import Modal from '../Modal/Modal';
+import UpdateTodoForm from '../UpdateTodoForm/UpdateTodoForm';
+import { ALL_TODOS_SECTION, ALL_TODOS_GROUP } from '../../constants';
+import { COMPLETED_TODOS_SECTION, COMPLETED_TODOS_GROUP } from '../../constants';
 
 function TodoList({ activeGroup, allTodos, deleteTodo, updateTodo }) {
   const [isUpdateTodoModalActive, setIsUpdateTodoModalActive] = React.useState(false);
-  const [formValues, setFormValues] = React.useState({
-    title: "",
-    day: "",
-    month: "",
-    year: "",
-    completed: false,
-    description: ""
-  });
+  const [editingTodo, setEditingTodo] = React.useState(null);
 
   
   function getTodosWithNoDueDate(todos) { 
@@ -60,9 +53,15 @@ function TodoList({ activeGroup, allTodos, deleteTodo, updateTodo }) {
   const removeUpdateTodoModal = () => setIsUpdateTodoModalActive(false);
   
   const displayUpdateTodoModal = (todo) => { 
-    setFormValues(todo);
+    setEditingTodo(todo);
     setIsUpdateTodoModalActive(true);
   };
+
+  function handleFormSubmit(updatedTodo) { 
+    updateTodo(updatedTodo, updatedTodo.id);
+    removeUpdateTodoModal();
+    setEditingTodo(null);
+  }
 
   return (
     <main>
@@ -79,14 +78,14 @@ function TodoList({ activeGroup, allTodos, deleteTodo, updateTodo }) {
           ))}
         </tbody>
       </table>
-      {isUpdateTodoModalActive &&
+      {isUpdateTodoModalActive && editingTodo && (
         <Modal removeModal={removeUpdateTodoModal}>
           <UpdateTodoForm
-            removeModal={removeUpdateTodoModal}
-            formValues={formValues}
-            updateTodo={updateTodo}
+            todo={editingTodo}
+            onSubmit={handleFormSubmit}
           />
-        </Modal>}
+        </Modal>
+      )}
     </main>
   );
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './TodoGroups.module.css';
-import TodoGroupsSection from './TodoGroupsSection';
-import { ALL_TODOS_SECTION, COMPLETED_TODOS_SECTION } from './constants';
-import { ALL_TODOS_CLASS, COMPLETED_TODOS_CLASS } from './constants';
+import TodoGroupsSection from '../TodoGroupsSection/TodoGroupsSection';
+import { ALL_TODOS_SECTION, COMPLETED_TODOS_SECTION } from '../../constants';
+import { ALL_TODOS_CLASS, COMPLETED_TODOS_CLASS } from '../../constants';
 
 function TodoGroups({ allTodos, activeGroup, setActiveGroup }) { 
   
