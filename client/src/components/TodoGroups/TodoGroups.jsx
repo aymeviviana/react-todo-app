@@ -7,19 +7,12 @@ import { getTodoGroupsTotal } from '../../utils/todoGroupsHelpers';
 import { ALL_TODOS_SECTION, COMPLETED_TODOS_SECTION } from '../../constants';
 import { ALL_TODOS_CLASS, COMPLETED_TODOS_CLASS } from '../../constants';
 
-function TodoGroups({ allTodos, activeGroup, setActiveGroup }) { 
+function TodoGroups({ allTodos, activeGroup, updateActiveGroup }) { 
   const allTodoGroups = getAllTodoGroups(allTodos);
   const allTodoGroupsTotal = getTodoGroupsTotal(allTodoGroups);
 
   const completedTodoGroups = getCompletedTodoGroups(allTodos);
   const completedTodoGroupsTotal = getTodoGroupsTotal(completedTodoGroups);
-  
-  function handleGroupClick(event) { 
-    const currentSection = event.currentTarget.dataset.section;
-    const currentGroup = event.currentTarget.dataset.group;
-    const currentTotal = event.currentTarget.dataset.total;
-    setActiveGroup({ section: currentSection, name: currentGroup, total: currentTotal});
-  }
 
   return (
     <div className={styles.sidebar}>
@@ -29,7 +22,7 @@ function TodoGroups({ allTodos, activeGroup, setActiveGroup }) {
         activeGroup={activeGroup}
         todoGroups={allTodoGroups}
         todoGroupsTotal={allTodoGroupsTotal}
-        handleGroupClick={handleGroupClick}
+        onGroupClick={updateActiveGroup}
       />
 
       <TodoGroupsSection
@@ -38,7 +31,7 @@ function TodoGroups({ allTodos, activeGroup, setActiveGroup }) {
         activeGroup={activeGroup}
         todoGroups={completedTodoGroups}
         todoGroupsTotal={completedTodoGroupsTotal}
-        handleGroupClick={handleGroupClick}
+        onGroupClick={updateActiveGroup}
       />
     </div>
   );

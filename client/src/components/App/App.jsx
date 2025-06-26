@@ -9,11 +9,12 @@ import { ALL_TODOS_SECTION } from '../../constants';
 import { ALL_TODOS_GROUP } from '../../constants';
 import { ENDPOINT } from '../../constants';
 
+
 function App() {
   const [isAddTodoModalActive, setIsAddTodoModalActive] = React.useState(false);
   const [allTodos, setAllTodos] = React.useState([]);
   const [activeGroup, setActiveGroup] = React.useState({section: ALL_TODOS_SECTION, name: ALL_TODOS_GROUP, total: ""});
-
+  
   React.useEffect(() => { 
     async function fetchAllTodos() { 
       try {
@@ -23,9 +24,10 @@ function App() {
           throw new Error(`${response.status}: ${response.statusText}`);
         }
         const todos = await response.json();
+        const todosTotal = todos.length;
         sortTodos(todos);
         setAllTodos(todos);
-        setActiveGroup({ section: ALL_TODOS_SECTION, name: ALL_TODOS_GROUP, total: todos.length });
+        updateActiveGroup(ALL_TODOS_SECTION, ALL_TODOS_GROUP, todosTotal);
       } catch (error) { 
         console.log(`Encountered an Error: ${error.message}`)
       }
@@ -37,6 +39,10 @@ function App() {
   const displayAddTodoModal = () => setIsAddTodoModalActive(true);
   const removeAddTodoModal = () => setIsAddTodoModalActive(false);
 
+  const updateActiveGroup = (sectionName, groupName, todoTotal) => { 
+    setActiveGroup({section: sectionName, name: groupName, total: todoTotal})
+  }
+
   const addTodo = (todo) => {
     const nextTodos = [...allTodos, todo];
     sortTodos(nextTodos);
@@ -47,6 +53,7 @@ function App() {
     const nextTodos = allTodos.filter(({ id }) => id !== todoId);
     sortTodos(nextTodos);
     setAllTodos(nextTodos);
+    updateActiveGroup(activeGroup.section, activeGroup.name, nextTodos.length);
   };
 
   const updateTodo = (newTodo, todoId) => { 
@@ -56,14 +63,10 @@ function App() {
     setAllTodos(nextTodos);
   };
 
-  const resetActiveGroup = () => { 
-    setActiveGroup({section: ALL_TODOS_SECTION, name: ALL_TODOS_GROUP, total: allTodos.length + 1})
-  }
-
   function handleAddTodoFormSubmit(todo) { 
     removeAddTodoModal();
     addTodo(todo);
-    resetActiveGroup();
+    updateActiveGroup(ALL_TODOS_SECTION, ALL_TODOS_GROUP, allTodos.length + 1);
   }
 
   return (
@@ -71,7 +74,7 @@ function App() {
       <TodoGroups
         allTodos={allTodos}
         activeGroup={activeGroup}
-        setActiveGroup={setActiveGroup}
+        updateActiveGroup={updateActiveGroup}
       />
       <TodoArea
         activeGroup={activeGroup}
