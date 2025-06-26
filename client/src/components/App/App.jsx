@@ -5,9 +5,11 @@ import TodoArea from '../TodoArea/TodoArea';
 import Modal from '../Modal/Modal';
 import AddTodoForm from '../AddTodoForm/AddTodoForm';
 import { sortTodos } from '../../utils/todosHelpers.jsx';
-import { ALL_TODOS_SECTION } from '../../constants';
+import { ALL_TODOS_SECTION, COMPLETED_TODOS_GROUP, COMPLETED_TODOS_SECTION } from '../../constants';
 import { ALL_TODOS_GROUP } from '../../constants';
 import { ENDPOINT } from '../../constants';
+import { getAllTodoGroups, getCompletedTodoGroups, getTodoGroupsTotal } from '../../utils/todoGroupsHelpers.jsx';
+
 
 
 function App() {
@@ -43,6 +45,27 @@ function App() {
     setActiveGroup({section: sectionName, name: groupName, total: todoTotal})
   }
 
+  
+  function getActiveGroupTodoTotal(activeGroup, nextTodos) { 
+    let todoTotal;
+    let sectionTodos;
+    
+    if (activeGroup.section === ALL_TODOS_SECTION) {
+      sectionTodos = getAllTodoGroups(nextTodos);
+    } else if (activeGroup.section === COMPLETED_TODOS_SECTION) { 
+      sectionTodos = getCompletedTodoGroups(nextTodos);
+    }
+
+    if (activeGroup.name === ALL_TODOS_GROUP || activeGroup.name === COMPLETED_TODOS_GROUP) { 
+      todoTotal = getTodoGroupsTotal(sectionTodos);
+    } else {
+      const [ groupName, count] = sectionTodos.find(([groupName, _]) => activeGroup.name === groupName);
+      todoTotal = count;
+    }
+
+    return todoTotal;
+  }
+
   const addTodo = (todo) => {
     const nextTodos = [...allTodos, todo];
     sortTodos(nextTodos);
@@ -53,7 +76,8 @@ function App() {
     const nextTodos = allTodos.filter(({ id }) => id !== todoId);
     sortTodos(nextTodos);
     setAllTodos(nextTodos);
-    updateActiveGroup(activeGroup.section, activeGroup.name, nextTodos.length);
+    const todoTotal = getActiveGroupTodoTotal(activeGroup, nextTodos);
+    updateActiveGroup(activeGroup.section, activeGroup.name, todoTotal);
   };
 
   const updateTodo = (newTodo, todoId) => { 
