@@ -19,18 +19,18 @@ function TodoGroups({ allTodos, activeGroup, updateActiveGroup }) {
       <TodoGroupsSection
         sectionName={ALL_TODOS_SECTION}
         sectionClass={ALL_TODOS_CLASS}
+        sectionTodoTotal={allTodoGroupsTotal}
         activeGroup={activeGroup}
         todoGroups={allTodoGroups}
-        todoGroupsTotal={allTodoGroupsTotal}
         onGroupClick={updateActiveGroup}
       />
 
       <TodoGroupsSection
         sectionName={COMPLETED_TODOS_SECTION}
         sectionClass={COMPLETED_TODOS_CLASS}
+        sectionTodoTotal={completedTodoGroupsTotal}
         activeGroup={activeGroup}
         todoGroups={completedTodoGroups}
-        todoGroupsTotal={completedTodoGroupsTotal}
         onGroupClick={updateActiveGroup}
       />
     </div>

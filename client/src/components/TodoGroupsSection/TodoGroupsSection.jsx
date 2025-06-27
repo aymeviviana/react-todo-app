@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './TodoGroupsSection.module.css';
 import Group from '../Group/Group';
 
-function TodoGroupsSection({ sectionName, sectionClass, activeGroup, todoGroups, todoGroupsTotal, onGroupClick }) { 
+function TodoGroupsSection({ sectionName, sectionClass, sectionTodoTotal, activeGroup, todoGroups, onGroupClick }) { 
   const isHeaderGroupActive = activeGroup.section === sectionName && activeGroup.name === sectionName;
   return (
     <section className={`${styles.sectionWrapper} ${styles[sectionClass]}`}>
@@ -13,12 +13,12 @@ function TodoGroupsSection({ sectionName, sectionClass, activeGroup, todoGroups,
           <dl
             data-section={sectionName}
             data-group={sectionName}
-            data-total={todoGroupsTotal}
+            data-total={sectionTodoTotal}
             className={styles.sectionHeaderWrapper}
-            onClick={() => onGroupClick(sectionName, sectionName, todoGroupsTotal)}
+            onClick={() => onGroupClick(sectionName, sectionName, sectionTodoTotal)}
           >
           <dt className={styles.sectionName}>{sectionName}</dt>
-          <dd className={styles.sectionTotal}>{todoGroupsTotal}</dd>
+          <dd className={styles.sectionTotal}>{sectionTodoTotal}</dd>
           </dl>
         </header>
       </div>
